@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.name        = "acts_as_saveable"
   s.version     = ActsAsSaveable::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Ryan"]
-  s.email       = ["ryanto"]
+  s.authors     = ["Ali Ibrahim"]
+  s.email       = ["aliibrahim@gmail.com"]
   s.homepage    = "http://rubygems.org/gems/acts_as_saveable"
   s.summary     = %q{Rails gem to allowing records to be saveable}
   s.description = %q{Rails gem to allowing records to be saveable}

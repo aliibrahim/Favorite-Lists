@@ -1,6 +1,4 @@
-# Acts As Saveable (aka Acts As Likeable)
-
-[![Build Status](https://travis-ci.org/ryanto/acts_as_saveable.png)](https://travis-ci.org/ryanto/acts_as_saveable)
+# Acts As Saveable (aka Acts As Read-Later)
 
 Acts As Saveable is a Ruby Gem specifically written for Rails/ActiveRecord models.
 The main goals of this gem are:
