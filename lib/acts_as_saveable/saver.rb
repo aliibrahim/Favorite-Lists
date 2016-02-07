@@ -5,8 +5,8 @@ module ActsAsSaveable
 
       # allow user to define these
       aliases = {
-        :save_up_for    => [:likes, :upsaves, :up_saves],
-        :save_down_for  => [:dislikes, :downsaves, :down_saves],
+        :save_up_for    => [:upsaves, :up_saves],
+        :save_down_for  => [:downsaves, :down_saves],
         :saved_on?      => [:saved_for?],
         :saved_up_on?   => [:saved_up_for?],
         :saved_down_on? => [:saved_down_for?],

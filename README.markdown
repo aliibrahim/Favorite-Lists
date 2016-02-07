@@ -23,7 +23,7 @@ The main goals of this gem are:
 Just add the following to your Gemfile.
 
 ```ruby
-gem 'acts_as_saveable', '~> 0.10.0'
+gem 'acts_as_saveable', '~> 0.10.1'
 ```
 
 And follow that up with a ``bundle install``.
@@ -94,9 +94,7 @@ Revisiting the previous example of code.
 
 # tally them up!
 @post.saves_for.size # => 5
-@post.get_likes.size # => 3
 @post.get_upsaves.size # => 3
-@post.get_dislikes.size # => 2
 @post.get_downsaves.size # => 2
 ```
 
@@ -146,9 +144,7 @@ You can add a scope to your saved
 
 # tally them up!
 @post.find_saves_for(:save_scope => 'rank').size # => 5
-@post.get_likes(:save_scope => 'rank').size # => 3
 @post.get_upsaves(:save_scope => 'rank').size # => 3
-@post.get_dislikes(:save_scope => 'rank').size # => 2
 @post.get_downsaves(:save_scope => 'rank').size # => 2
 
 # saveable model can be saved under different scopes
@@ -176,9 +172,7 @@ You can add weight to your saved. The default value is 1.
 
 # tally them up!
 @post.find_saves_for(:save_scope => 'rank').sum(:save_weight) # => 6
-@post.get_likes(:save_scope => 'rank').sum(:save_weight) # => 6
 @post.get_upsaves(:save_scope => 'rank').sum(:save_weight) # => 6
-@post.get_dislikes(:save_scope => 'rank').sum(:save_weight) # => 4
 @post.get_downsaves(:save_scope => 'rank').sum(:save_weight) # => 4
 ```
 
@@ -191,18 +185,14 @@ class User < ActiveRecord::Base
   acts_as_saver
 end
 
-@user.likes @article
 
 @article.saves.size # => 1
-@article.likes.size # => 1
-@article.dislikes.size # => 0
 ```
 
 To check if a saver has saved on a model, you can use ``saved_for?``.  You can
 check how the saver saved by using ``saved_as_when_saved_for``.
 
 ```ruby
-@user.likes @comment1
 @user.up_saves @comment2
 # user has not saved on @comment3
 
@@ -218,8 +208,7 @@ check how the saver saved by using ``saved_as_when_saved_for``.
 You can also check whether the saver has saved up or down.
 
 ```ruby
-@user.likes @comment1
-@user.dislikes @comment2
+@user.saves @comment1
 # user has not saved on @comment3
 
 @user.saved_up_on? @comment1 # => true
@@ -232,7 +221,7 @@ You can also check whether the saver has saved up or down.
 @user.saved_down_on? @comment3 # => false
 ```
 
-Aliases for methods `saved_up_on?` and `saved_down_on?` are: `saved_up_for?`, `saved_down_for?`, `liked?` and `disliked?`.
+Aliases for methods `saved_up_on?` and `saved_down_on?` are: `saved_up_for?`, `saved_down_for?`.
 
 Also, you can obtain a list of all the objects a user has saved for.
 This returns the actual objects instead of instances of the Vote model.
@@ -242,10 +231,8 @@ All objects are eager loaded
 @user.find_saved_items
 
 @user.find_up_saved_items
-@user.find_liked_items
 
 @user.find_down_saved_items
-@user.find_disliked_items
 ```
 
 Members of an individual model that a user has saved for can also be
@@ -265,11 +252,11 @@ Savers can only saved once per model.  In this example the 2nd saved does not co
 because `@user` has already saved for `@shoe`.
 
 ```ruby
-@user.likes @shoe
-@user.likes @shoe
+@user.save_up_for @shoe
+@user.save_up_for @shoe
 
 @shoe.saves # => 1
-@shoe.likes # => 1
+@shoe.save_up_for # => 1
 ```
 
 To check if a saved counted, or registered, use `save_registered?` on your model
@@ -373,9 +360,9 @@ Some name-conflicting methods are renamed:
 + Renamed Saveable.unsave_for to unsave_by
 + Renamed Saveable.find_saves to find_saves_for
 + Renamed Saveable.up_saves to get_upsaves
-  + and its aliases :get_true_saves, :get_ups, :get_upsaves, :get_likes, :get_positives, :get_for_saves
+  + and its aliases :get_true_saves, :get_ups, :get_upsaves, :get_for_saves
 + Renamed Saveable.down_saves to get_downsaves
-  + and its aliases :get_false_saves, :get_downs, :get_downsaves, :get_dislikes, :get_negatives
+  + and its aliases :get_false_saves, :get_downs, :get_downsaves
 
 
 ## License
@@ -387,11 +374,6 @@ License](http://www.opensource.org/licenses/MIT).
 
 - Pass in a block of options when creating acts_as.  Allow for things
   like disabling the aliasing
-
-- Smarter language syntax.  Example: `@user.likes` will return all of the saveables
-that the user likes, while `@user.likes @model` will cast a saved for @model by
-@user.
-
 
 - The aliased methods are referred to by using the terms 'up/down' and/or
 'true/false'.  Need to come up with guidelines for naming these methods.
