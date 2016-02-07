@@ -177,8 +177,6 @@ shared_examples "a saver_model" do
       saveable2.save_by :saver => saver2
       expect(saver.find_up_saved_items).to include saveable
       expect(saver.find_up_saved_items.size).to eq(1)
-      expect(saver.find_liked_items).to include saveable
-      expect(saver.find_liked_items.size).to eq(1)
     end
 
     it 'returns objects that a user has upsaved for, using scope' do
@@ -215,8 +213,6 @@ shared_examples "a saver_model" do
       saveable2.save_down saver2
       expect(saver.find_down_saved_items).to include saveable
       expect(saver.find_down_saved_items.size).to eq(1)
-      expect(saver.find_disliked_items).to include saveable
-      expect(saver.find_disliked_items.size).to eq(1)
     end
 
     it 'returns objects that a user has downsaved for, using scope' do

@@ -11,24 +11,22 @@ module ActsAsSaveable
       aliases = {
 
         :save_up => [
-          :up_by, :upsave_by, :like_by, :liked_by,
-          :up_from, :upsave_from, :upsave_by, :like_from, :liked_from, :save_from
+          :upsaved_by, :upsave_from, :upsave_by, :save_from
         ],
 
         :save_down => [
-          :down_by, :downsave_by, :dislike_by, :disliked_by,
-          :down_from, :downsave_from, :downsave_by, :dislike_by, :disliked_by
+          :downsave_by, :downsave_from, :downsaved_by, :downsave_from
         ],
 
         :get_up_saves => [
-          :get_true_saves, :get_ups, :get_upsaves, :get_likes, :get_positives, :get_for_saves,
+          :get_true_saves, :get_upsaves, :get_for_saves
         ],
 
         :get_down_saves => [
-          :get_false_saves, :get_downs, :get_downsaves, :get_dislikes, :get_negatives
+          :get_false_saves, :get_downsaves
         ],
         :unsave_by => [
-          :unsave_up, :unsave_down, :unliked_by, :undisliked_by
+          :unsave_up, :unsave_down
         ]
       }
 

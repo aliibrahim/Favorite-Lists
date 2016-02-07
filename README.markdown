@@ -52,7 +52,7 @@ end
 @post = Post.new(:name => 'my post!')
 @post.save
 
-@post.liked_by @user
+@post.upsaved_by @user
 @post.saves_for.size # => 1
 ```
 
@@ -62,7 +62,7 @@ Here are some saving examples.  All of these calls are valid and acceptable.  Th
 more natural calls are the first few examples.
 
 ```ruby
-@post.liked_by @user1
+@post.upsaved_by @user1
 @post.downsave_from @user2
 @post.save_by :saver => @user3
 @post.save_by :saver => @user4, :saved => 'bad'
@@ -84,7 +84,7 @@ Revisiting the previous example of code.
 
 ```ruby
 # positive saves
-@post.liked_by @user1
+@post.upsaved_by @user1
 @post.save_by :saver => @user3
 @post.save_by :saver => @user5, :saved => 'like'
 
@@ -124,11 +124,8 @@ saver/saveable
 You can also 'unsaved' a model to remove a previous saved.
 
 ```ruby
-@post.liked_by @user1
-@post.unliked_by @user1
-
-@post.disliked_by @user1
-@post.undisliked_by @user1
+@post.upsaved_by @user1
+@post.unsaved_by @user1
 ```
 
 Unsaving works for both positive and negative saves.
@@ -139,7 +136,7 @@ You can add a scope to your saved
 
 ```ruby
 # positive saves
-@post.liked_by @user1, :save_scope => 'rank'
+@post.upsaved_by @user1, :save_scope => 'rank'
 @post.save_by :saver => @user3, :save_scope => 'rank'
 @post.save_by :saver => @user5, :saved => 'like', :save_scope => 'rank'
 
@@ -169,7 +166,7 @@ You can add weight to your saved. The default value is 1.
 
 ```ruby
 # positive saves
-@post.liked_by @user1, :save_weight => 1
+@post.upsaved_by @user1, :save_weight => 1
 @post.save_by :saver => @user3, :save_weight => 2
 @post.save_by :saver => @user5, :saved => 'like', :save_scope => 'rank', :save_weight => 3
 
@@ -279,13 +276,13 @@ To check if a saved counted, or registered, use `save_registered?` on your model
 after saving.  For example:
 
 ```ruby
-@hat.liked_by @user
+@hat.upsaved_by @user
 @hat.save_registered? # => true
 
-@hat.liked_by => @user
+@hat.upsaved_by => @user
 @hat.save_registered? # => false, because @user has already saved this way
 
-@hat.disliked_by @user
+@hat.dissaved_by @user
 @hat.save_registered? # => true, because user changed their saved
 
 @hat.saves.size # => 1

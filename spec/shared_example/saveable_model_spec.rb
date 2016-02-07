@@ -99,8 +99,8 @@ shared_examples "a saveable_model" do
   end
 
   it "should be able to unsaved a saver" do
-    saveable.liked_by(saver)
-    saveable.unliked_by(saver)
+    saveable.upsaved_by(saver)
+    saveable.unsave_by(saver)
     expect(saveable.saved_on_by?(saver)).to be false
   end
 

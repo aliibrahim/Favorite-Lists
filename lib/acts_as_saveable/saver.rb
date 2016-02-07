@@ -7,13 +7,10 @@ module ActsAsSaveable
       aliases = {
         :save_up_for    => [:likes, :upsaves, :up_saves],
         :save_down_for  => [:dislikes, :downsaves, :down_saves],
-        :unsave_for     => [:unlike, :undislike],
         :saved_on?      => [:saved_for?],
-        :saved_up_on?   => [:saved_up_for?, :liked?],
-        :saved_down_on? => [:saved_down_for?, :disliked?],
+        :saved_up_on?   => [:saved_up_for?],
+        :saved_down_on? => [:saved_down_for?],
         :saved_as_when_saving_on => [:saved_as_when_saved_on, :saved_as_when_saving_for, :saved_as_when_saved_for],
-        :find_up_saved_items   => [:find_liked_items],
-        :find_down_saved_items => [:find_disliked_items]
       }
 
       base.class_eval do
