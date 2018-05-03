@@ -1,6 +1,6 @@
-# Acts As Saveable (aka Acts As Read-Later)
+# Acts As Saveable (aka Favorite Lists)
 
-Acts As Saveable is a Ruby Gem specifically written for Rails/ActiveRecord models.
+Favorite Lists is a Ruby Gem specifically written for Rails/ActiveRecord models.
 The main goals of this gem are:
 
 - Allow any model to be saved on, like/dislike, upsaved/downsaved, for later reading and viewing etc.
